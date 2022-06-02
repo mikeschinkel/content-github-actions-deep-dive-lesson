@@ -23,7 +23,6 @@ runs:
     - name: "Generate environment vars file: ${{ inputs.filepath }}"
       shell: bash
       run: |
-        touch ${{ inputs.filepath }}
         {
           echo "VCENTER_SERVER='${{ inputs.vcenter_server }}'"
           echo "VM_SIZE='${{ inputs.vm_size }}'"
