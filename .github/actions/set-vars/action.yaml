@@ -3,6 +3,9 @@ name: 'Set environment variables'
 
 description: 'Configures environment variables for a workflow'
 
+# See https://arinco.com.au/blog/github-actions-share-environment-variables-across-workflows/
+
+
 inputs:
   vcenter_server:
     description: "IP address or domain name for vCenter Server (must have a vcenter/<host>.json file in repo for this to work)"
