@@ -17,7 +17,7 @@ runs:
       shell: bash
       run: |
         echo "ran=!" >> $GITHUB_ENV
-        echo "init"
+        echo "init — ${{ inputs.start_from }}"
   
     - id: setup
       if: github.action == inputs.start_from

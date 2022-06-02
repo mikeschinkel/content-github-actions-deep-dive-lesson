@@ -15,7 +15,7 @@ runs:
     - name: "Generate environment vars file"
       id: get_key
       env:
-        concurrency_key: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}
+        concurrency_key: ova-build-${{ inputs.vcenter_server }}-${{ github.ref_name }}
       shell: bash
       run: |
         echo "Concurrency key: ${{ env.concurrency_key }}"
