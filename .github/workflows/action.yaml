@@ -73,7 +73,7 @@ jobs:
 
   show:
     runs-on: ubuntu-latest
-    needs: [init, gatekeeper]
+    needs: init
     steps:
       - name: Get Env Vars
         run: |
