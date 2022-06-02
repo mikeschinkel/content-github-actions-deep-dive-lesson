@@ -69,6 +69,8 @@ jobs:
     needs: gatekeeper
     steps:
       - name: Show Vars
-        run: env
+        run: |
+          echo "CONCURRENCY_KEY: ${{ needs.init.outputs.concurrency_key }}"
+          env
 
 
