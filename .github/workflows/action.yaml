@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v2
       - id: set_vars
         name: Set Environment Variables
-        uses: ./.github/actions/set-vars
+        uses: .github/actions/set-vars
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
@@ -56,10 +56,12 @@ jobs:
         name: Show Vars
         run: |
           echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
-          echo "VM_SIZE: $VM_SIZE"
-          echo "vars_file: ${{ env.VCENTER_USERNAME }}"
+          echo "VM_SIZE: ${{ env.VM_SIZE }}"
+          echo "VCENTER_USERNAME: ${{ env.VCENTER_USERNAME }}"
 
     outputs:
+      vars_file: ${{ steps.set_vars.outputs.vars_file }}
+      vars_file: ${{ steps.set_vars.outputs.vars_file }}
       vars_file: ${{ steps.set_vars.outputs.vars_file }}
       concurrency_key: ${{ steps.set_vars.outputs.concurrency_key }}
 

@@ -18,7 +18,7 @@ inputs:
   vars_file:
     description: "File containing environment variables"
     required: false
-    default: ./.github/vars/vars.env
+    default: .github/vars/vars.env
 
 runs:
   using: "composite"
@@ -33,11 +33,6 @@ runs:
           echo "VCENTER_PASSWORD=it-is-a-secret"
         } > ${{ inputs.vars_file }}
         sed "" ${{ inputs.vars_file }} >> $GITHUB_ENV
-    - name: "Show vars"
-      shell: bash
-      run: |
-        echo ${{ env.VCENTER_SERVER }}
-        cat ${{ env.GITHUB_ENV }}
 
 outputs:
   concurrency_key:
