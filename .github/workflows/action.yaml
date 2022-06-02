@@ -60,69 +60,69 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     env:
-      step_no: 1
       start_from: ${{ github.event.inputs.start_from }}
     steps:
       - id: setup
         if: github.action == env.start_from
         name: Setup
         run: |
+          echo "step_no=1" >> $GITHUB_ENV
           echo "setup — ${{ env.step_no }}"
 
       - id: start
         if: github.action == env.start_from 
         name: start
         run: |
-          echo "::set-env name=step_no::2"
+          echo "step_no=2" >> $GITHUB_ENV
           echo "start — ${{ env.step_no }}"
 
       - id: clean
         if: github.action == env.start_from 
         name: clean
         run: |
-          echo "::set-env name=step_no::3"
+          echo "step_no=3" >> $GITHUB_ENV
           echo "clean — ${{ env.step_no }}"
 
       - id: k8s
         if: github.action == env.start_from 
         name: k8s
         run: |
-          echo "::set-env name=step_no::4"
+          echo "step_no=4" >> $GITHUB_ENV
           echo "k8s — ${{ env.step_no }}"
 
       - id: tools
         if: github.action == env.start_from 
         name: tools
         run: |
-          echo "::set-env name=step_no::5"
+          echo "step_no=5" >> $GITHUB_ENV
           echo "tools — ${{ env.step_no }}"
 
       - id: iso
         if: github.action == env.start_from 
         name: iso
         run: |
-          echo "::set-env name=step_no::6"
+          echo "step_no=6" >> $GITHUB_ENV
           echo "iso — ${{ env.step_no }}"
 
       - id: upload
         if: github.action == env.start_from 
         name: upload
         run: |
-          echo "::set-env name=step_no::7"
+          echo "step_no=7" >> $GITHUB_ENV
           echo "upload — ${{ env.step_no }}"
 
       - id: install
         if: github.action == env.start_from 
         name: install
         run: |
-          echo "::set-env name=step_no::8"
+          echo "step_no=8" >> $GITHUB_ENV
           echo "install — ${{ env.step_no }}"
 
       - id: export
         if: github.action == env.start_from 
         name: export
         run: |
-          echo "::set-env name=step_no::9"
+          echo "step_no=9" >> $GITHUB_ENV
           echo "export — ${{ env.step_no }}"
 
 
