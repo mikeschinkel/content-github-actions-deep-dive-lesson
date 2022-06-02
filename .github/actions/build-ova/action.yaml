@@ -20,7 +20,7 @@ runs:
         echo "init — ${{ inputs.start_from }} — ${{ steps.id }}"
   
     - id: setup
-      if: "setup" == inputs.start_from
+      if: inputs.start_from == "setup" 
       name: Setup
       shell: bash
       run: |
@@ -28,7 +28,7 @@ runs:
         echo "setup"
 
     - id: start
-      if: "start"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "start" || contains(env.ran,inputs.start_from)
       name: start
       shell: bash
       run: |
@@ -36,7 +36,7 @@ runs:
         echo "start"
   
     - id: clean
-      if: "clean"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "clean" || contains(env.ran,inputs.start_from)
       name: clean
       shell: bash
       run: |
@@ -44,7 +44,7 @@ runs:
         echo "clean"
   
     - id: k8s
-      if: "k8s"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "k8s" || contains(env.ran,inputs.start_from)
       name: k8s
       shell: bash
       run: |
@@ -52,7 +52,7 @@ runs:
         echo "k8s"
   
     - id: tools
-      if: "tools"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "tools" || contains(env.ran,inputs.start_from)
       name: tools
       shell: bash
       run: |
@@ -60,7 +60,7 @@ runs:
         echo "tools"
   
     - id: iso
-      if: "iso"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "iso" || contains(env.ran,inputs.start_from)
       name: iso
       shell: bash
       run: |
@@ -68,7 +68,7 @@ runs:
         echo "iso"
   
     - id: upload
-      if: "upload"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "upload" || contains(env.ran,inputs.start_from)
       name: upload
       shell: bash
       run: |
@@ -76,7 +76,7 @@ runs:
         echo "upload"
   
     - id: install
-      if: "install"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "install" || contains(env.ran,inputs.start_from)
       name: install
       shell: bash
       run: |
@@ -84,7 +84,7 @@ runs:
         echo "install"
   
     - id: export
-      if: "export"==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: inputs.start_from == "export" || contains(env.ran,inputs.start_from)
       name: export
       shell: bash
       run: |
