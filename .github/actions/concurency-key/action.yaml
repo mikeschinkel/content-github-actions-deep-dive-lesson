@@ -1,0 +1,22 @@
+
+name: 'Get Concurrency Key'
+
+description: 'Sets concurrency_key as output'
+
+inputs:
+  concurrency_key:
+    description: "The concurrency key to use"
+    required: false
+    default: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Generate environment vars file"
+      shell: bash
+      run: 'echo "Concurrency key: ${{ inputs.concurrency_key }}"'
+
+outputs:
+  concurrency_key:
+    description: 'Key by which to limit concurrency'
+    value: ${{ inputs.concurrency_key }}
