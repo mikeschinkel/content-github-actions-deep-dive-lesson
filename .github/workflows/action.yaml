@@ -84,12 +84,15 @@ jobs:
     needs: [init, gatekeeper]
     steps:
       - name: Get Env Vars
-        run: cat ${{ env.vars_file }} >> $GITHUB_ENV
+        run: |
+          echo "vars_file: "${{ env.vars_file }}"
+          cat ${{ env.vars_file }} >> $GITHUB_ENV
+          cat $GITHUB_ENV
 
       - name: Show Vars
         run: |
-          echo "VCENTER_SERVER: ${VCENTER_SERVER}"
-          echo "VM_SIZE: $VM_SIZE"
+          echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
+          echo "VM_SIZE: ${{ env.VM_SIZE }}"
           echo "CONCURRENCY_KEY: ${{ needs.init.outputs.concurrency_key }}"
 
 
