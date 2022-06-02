@@ -50,7 +50,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - id: before
-      - name: Show Vars
+        name: Show Vars
         run: |
           echo "vars_file: ${{ env.vars_file }}"
       - id: set_vars
@@ -61,7 +61,7 @@ jobs:
           vm_size: ${{ github.event.inputs.vm_size }}
           vars_file: ${{ env.vars_file }}
       - id: after
-      - name: Show Vars
+        name: Show Vars
         run: |
           echo "VCENTER_SERVER: $VCENTER_SERVER"
           echo "VM_SIZE: $VM_SIZE"
