@@ -31,5 +31,8 @@ runs:
           echo "CONCURRENCY_KEY=${{ github.workflow }}-${{ inputs.vcenter_server }}"
         } > ${{ inputs.filepath }}
         sed "" ${{ inputs.filepath }} >> $GITHUB_ENV
-    outputs:
-      filepath ${{ inputs.filepath }}
+
+outputs:
+  filepath:
+    description: 'Filepath of Environment Vars file'
+    value: ${{ inputs.filepath }}
