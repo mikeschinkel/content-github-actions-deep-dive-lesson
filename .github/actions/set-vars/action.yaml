@@ -28,7 +28,6 @@ runs:
           echo "VM_SIZE='${{ inputs.vm_size }}'"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-          echo "CONCURRENCY_KEY=${{ github.workflow }}-${{ inputs.vcenter_server }}"
         } > ${{ inputs.filepath }}
         sed "" ${{ inputs.filepath }} >> $GITHUB_ENV
 
@@ -36,3 +35,6 @@ outputs:
   filepath:
     description: 'Filepath of Environment Vars file'
     value: ${{ inputs.filepath }}
+  concurrency_key:
+    description: 'Key by which to limit concurrency'
+    value: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}

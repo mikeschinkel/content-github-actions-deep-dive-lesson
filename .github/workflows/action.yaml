@@ -47,16 +47,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - id: set-vars
+      - id: set_vars
         name: Set Environment Variables
         uses: ./.github/actions/set-vars
         with:
           vcenter_server: ${{ inputs.vcenter_server }}
           vm_size: ${{ inputs.vm_size }}
+    outputs:
+      concurrency_key: ${{ steps.set_vars.outputs.concurrency_key }}
 
   gatekeeper:
     runs-on: ubuntu-latest
-    concurrency: ${{ env.CONCURRENCY_KEY }}
+    concurrency: ${{ jobs.init.concurrency_key }}
     steps:
       - name: Announce intent
         run: echo 'One at a time'
