@@ -15,29 +15,20 @@ inputs:
     description: "Size of OVA to generate (mini, small, medium or large)"
     required: false
     default: mini
-  vars_file:
-    description: "File containing environment variables"
-    required: false
-    default: .github/vars/vars.env
 
 runs:
   using: "composite"
   steps:
     - name: "Generate environment vars file"
       shell: bash
+      env:
+        vars_file: github/vars/vars.env
       run: |
         {
           echo "VCENTER_SERVER=${{ inputs.vcenter_server }}"
           echo "VM_SIZE=${{ inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-        } > ${{ inputs.vars_file }}
-        sed "" ${{ inputs.vars_file }} >> $GITHUB_ENV
+        } > ${{ env.vars_file }}
+        sed "" ${{ env.vars_file }} >> $GITHUB_ENV
 
-outputs:
-  concurrency_key:
-    description: 'Key by which to limit concurrency'
-    value: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}
-  vars_file:
-    description: "Filepath of Environment Vars file"
-    value: ${{ inputs.vars_file }}
