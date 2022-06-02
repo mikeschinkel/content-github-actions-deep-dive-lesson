@@ -63,8 +63,8 @@ jobs:
       - id: after
         name: Show Vars
         run: |
-          echo "VCENTER_SERVER: $VCENTER_SERVER"
-          echo "VM_SIZE: $VM_SIZE"
+          echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
+          echo "VM_SIZE: $vm_size"
           echo "vars_file: ${{ env.vars_file }}"
 
     outputs:
@@ -84,7 +84,7 @@ jobs:
     needs: [init, gatekeeper]
     steps:
       - name: Get Env Vars
-        run: cat ${{ env.VARS_FILE }} >> $GITHUB_ENV
+        run: cat ${{ env.vars_file }} >> $GITHUB_ENV
 
       - name: Show Vars
         run: |
