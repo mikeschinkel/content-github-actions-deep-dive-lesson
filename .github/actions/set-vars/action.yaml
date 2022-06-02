@@ -29,7 +29,7 @@ runs:
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
         } > ${{ inputs.vars_file }}
-        cat ${{ inputs.vars_file }}
+        cat ${{ inputs.vars_file }} >> $GITHUB_ENV
 
 outputs:
   concurrency_key:

@@ -40,26 +40,18 @@ on:
           - from-install
           - from-export
 
-env:
-  vars_file: /tmp/vars.env
-
 jobs:
   init:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - id: before
-        name: Show Vars
-        run: |
-          echo "vars_file: ${{ env.vars_file }}"
       - id: set_vars
         name: Set Environment Variables
         uses: ./.github/actions/set-vars
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
-          vars_file: ${{ env.vars_file }}
       - id: after
         name: Show Vars
         run: |
@@ -75,12 +67,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - name: Get Env Vars
-        run: |
-          echo "vars_file: ${{ env.vars_file }}"
-          cat ${{ env.vars_file }} >> $GITHUB_ENV
-          cat ${{ env.GITHUB_ENV }}
-
       - name: Show Vars
         run: |
           echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
