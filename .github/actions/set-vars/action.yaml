@@ -26,8 +26,8 @@ runs:
         {
           echo "VCENTER_SERVER='${{ inputs.vcenter_server }}'"
           echo "VM_SIZE='${{ inputs.vm_size }}'"
-          echo "VCENTER_USERNAME=${{ secrets.APPINSIGHT_VIUSER }}"
-          echo "VCENTER_PASSWORD=${{ secrets.APPINSIGHT_VIPASSWORD }}"
+          echo "VCENTER_USERNAME=foo@bar.baz"
+          echo "VCENTER_PASSWORD=it-is-a-secret"
           echo "CONCURRENCY_KEY=${{ github.workflow }}-${{ inputs.vcenter_server }}"
         } > ${{ inputs.filepath }}
         sed "" ${{ inputs.filepath }} >> $GITHUB_ENV
