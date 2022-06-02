@@ -20,16 +20,17 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Generate environment vars file: ${{ github.event.inputs.vars_file }}"
+    - name: "Generate environment vars file"
       shell: bash
       run: |
+        echo "vars_file: ${{ github.event.inputs.vars_file }}"
         {
           echo "VCENTER_SERVER=${{ github.event.inputs.vcenter_server }}"
           echo "VM_SIZE=${{ github.event.inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-        } > ${{ github.event.inputs.vars_file }}
-        cat ${{ github.event.inputs.vars_file }}
+        } > "${{ github.event.inputs.vars_file }}"
+        #cat ${{ github.event.inputs.vars_file }}
 
 outputs:
   concurrency_key:
