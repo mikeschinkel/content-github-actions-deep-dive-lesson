@@ -4,6 +4,10 @@ name: 'Set environment variables'
 description: 'Configures environment variables for a workflow'
 
 inputs:
+  vars_file:
+    description: "File containing environment variables"
+    required: false
+    default: ./.github/vars/vars.env
   vcenter_server:
     description: "IP address or domain name for vCenter Server (must have a vcenter/<host>.json file in repo for this to work)"
     required: false
@@ -12,10 +16,6 @@ inputs:
     description: "Size of OVA to generate (mini, small, medium or large)"
     required: false
     default: mini
-  vars_file:
-    description: "File containing environment variables"
-    required: true
-    default: ./.github/vars/vars.env
 
 runs:
   using: "composite"

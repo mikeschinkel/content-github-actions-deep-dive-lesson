@@ -55,7 +55,7 @@ jobs:
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
-          vars_file: ${{ env.vars_file }}
+          vars_file: /tmp/vars.env
       - name: Show Vars
         run: |
           echo "VCENTER_SERVER: $VCENTER_SERVER"
