@@ -57,6 +57,9 @@ jobs:
   gatekeeper:
     runs-on: ubuntu-latest
     concurrency: ${{ env.CONCURRENCY_KEY }}
+    steps:
+      - name: Announce intent
+      - run: echo 'One at a time'
 
   show:
     runs-on: ubuntu-latest
