@@ -85,7 +85,7 @@ jobs:
     steps:
       - name: Get Env Vars
         run: |
-          echo "vars_file: "${{ env.vars_file }}"
+          echo "vars_file: ${{ env.vars_file }}"
           cat ${{ env.vars_file }} >> $GITHUB_ENV
           cat $GITHUB_ENV
 
