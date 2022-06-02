@@ -7,11 +7,11 @@ inputs:
   vcenter_server:
     description: "IP address or domain name for vCenter Server (must have a vcenter/<host>.json file in repo for this to work)"
     required: false
-    default: 10.174.8.106
+    default: 10.174.8.38
   vm_size:
     description: "Size of OVA to generate (mini, small, medium or large)"
     required: false
-    default: small
+    default: mini
 
 runs:
   using: "composite"
@@ -20,8 +20,8 @@ runs:
       shell: bash
       run: |
         {
-          echo "VCENTER_SERVER='${{ github.event.inputs.vcenter_server }}'"
-          echo "VM_SIZE='${{ github.event.inputs.vm_size }}'"
+          echo "VCENTER_SERVER=${{ github.event.inputs.vcenter_server }}"
+          echo "VM_SIZE=${{ github.event.inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
         } >> $GITHUB_ENV

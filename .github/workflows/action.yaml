@@ -75,7 +75,7 @@ jobs:
     steps:
       - name: Show Vars
         run: |
-          echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
+          echo "VCENTER_SERVER: ${VCENTER_SERVER}"
           echo "CONCURRENCY_KEY: ${{ needs.init.outputs.concurrency_key }}"
 
 
