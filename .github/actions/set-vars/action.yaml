@@ -14,7 +14,7 @@ inputs:
     default: mini
   vars_file:
     description: "File containing environment variables"
-    required: false
+    required: true
     default: ./.github/vars/vars.env
 
 runs:
