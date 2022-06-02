@@ -25,6 +25,7 @@ runs:
       run: |
         echo "vars_file: ${{ inputs.vars_file }}"
         {
+          echo "VARS_FILE=${{ inputs.vars_file }}"
           echo "VCENTER_SERVER=${{ inputs.vcenter_server }}"
           echo "VM_SIZE=${{ inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
