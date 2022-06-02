@@ -1,0 +1,35 @@
+
+name: 'Set environment variables'
+
+description: 'Configures environment variables for a workflow'
+
+inputs:
+  vcenter_server:
+    description: "IP address or domain name for vCenter Server (must have a vcenter/<host>.json file in repo for this to work)"
+    required: false
+    default: 10.174.8.106
+  vm_size:
+    description: "Size of OVA to generate (mini, small, medium or large)"
+    required: false
+    default: small
+  filepath:
+    description: "File containing environment variables"
+    required: false
+    default: ./.github/vars/env.var
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Generate environment vars file: ${{ inputs.filepath }}"
+      shell: bash
+      run: |
+        {
+          echo "VCENTER_SERVER='${{ inputs.vcenter_server }}'"
+          echo "VM_SIZE='${{ inputs.vm_size }}'"
+          echo "VCENTER_USERNAME=${{ secrets.APPINSIGHT_VIUSER }}"
+          echo "VCENTER_PASSWORD=${{ secrets.APPINSIGHT_VIPASSWORD }}"
+          echo "CONCURRENCY_KEY=${{ github.workflow }}-${{ inputs.vcenter_server }}"
+        } > ${{ inputs.filepath }}
+        sed "" ${{ inputs.filepath }} >> $GITHUB_ENV
+    outputs:
+      filepath ${{ inputs.filepath }}

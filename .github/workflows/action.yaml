@@ -1,36 +1,67 @@
-# This is a placeholder so actions won't default to a getting started page
 
-name: Deploy Lambda Func
+name: Test Set Vars
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      vcenter_server:
+        type: choice
+        description: 'vCenter Server to run OVA build on'
+        required: true
+        default: 10.174.8.106
+        options:
+          - 10.174.8.106
+          - 10.174.8.38
+
+      vm_size:
+        type: choice
+        description: 'Size of OVA to build'
+        required: true
+        default: small
+        options:
+          - mini
+          - small
+          - medium
+          - large
+
+      build_from:
+        type: choice
+        description: 'Make target to build FROM (inclusive)'
+        required: false
+        default: from-setup
+        options:
+          - from-setup
+          - from-start
+          - from-clean
+          - from-k8s
+          - from-tools
+          - from-iso
+          - from-upload
+          - from-install
+          - from-export
+
 
 jobs:
-  build:
+  init:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up python
-        uses: actions/setup-python@v2
+      - id: set-vars
+        name: Set Environment Variables
+        uses: ./.github/actions/set-vars
         with:
-          python-version: 3.8
-      - name: Install Libraries
-        run: |
-            cd function
-            python -m pip install --upgrade pip
-            if [ -f requirements.txt ]; then pip install -r requirements.txt -t .; fi
-      - name: Create zip bundle
-        run: |
-            cd function
-            zip -r ../${{ github.sha }}.zip .
-          
-      - name: Archive artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: zipped-bundle
-          path: ${{ github.sha }}.zip
+          vcenter_server: ${{ inputs.vcenter_server }}
+          vm_size: ${{ inputs.vm_size }}
 
-           
+  gatekeeper:
+    runs-on: ubuntu-latest
+    concurrency: ${{ env.CONCURRENCY_KEY }}
+
+  show:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Vars
+        run: env
+
+
