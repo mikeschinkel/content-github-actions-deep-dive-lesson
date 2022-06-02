@@ -1,0 +1,82 @@
+
+name: Build OVA
+
+description: "Builds an VMware OVA on a vSphere 'Builder' VM"
+
+inputs:
+  start_from:
+    description: 'Step to start build FROM (inclusive)'
+    required: true
+    default: setup
+
+runs:
+  using: composite
+
+  env:
+    start_from: ${{ github.event.inputs.start_from }}
+    ran: "!"
+
+  steps:
+    - id: setup
+      if: github.action == env.start_from
+      name: Setup
+      run: |
+        echo "ran=${{github.action}}" >> $GITHUB_ENV
+        echo "setup"
+  
+    - id: start
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: start
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "start"
+  
+    - id: clean
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: clean
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "clean"
+  
+    - id: k8s
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: k8s
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "k8s"
+  
+    - id: tools
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: tools
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "tools"
+  
+    - id: iso
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: iso
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "iso"
+  
+    - id: upload
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: upload
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "upload"
+  
+    - id: install
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: install
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "install"
+  
+    - id: export
+      if: github.action==env.start_from || contains(env.ran,env.start_from)
+      name: export
+      run: |
+        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "export"
+  
