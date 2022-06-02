@@ -28,7 +28,7 @@ on:
         type: choice
         description: 'Step to start build FROM (inclusive)'
         required: false
-        default: setup
+        default: k8s
         options:
           - setup
           - start
@@ -63,65 +63,65 @@ jobs:
       start_from: ${{ github.event.inputs.start_from }}
     steps:
       - id: setup
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=1
         env:
           step_no: 1
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=1
         name: Setup
         run: echo "setup — ${{ env.step_no }}"
 
       - id: start
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=2
         env:
           step_no: 2
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=2
         name: start
         run: echo "start — ${{ env.step_no }}"
 
       - id: clean
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=3
         env:
           step_no: 3
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=3
         name: clean
         run: echo "clean — ${{ env.step_no }}"
 
       - id: k8s
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=4
         env:
           step_no: 4
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=4
         name: k8s
         run: echo "k8s — ${{ env.step_no }}"
 
       - id: tools
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=5
         env:
           step_no: 5
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=5
         name: tools
         run: echo "tools — ${{ env.step_no }}"
 
       - id: iso
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=6
         env:
           step_no: 6
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=6
         name: iso
         run: echo "iso — ${{ env.step_no }}"
 
       - id: upload
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=7
         env:
           step_no: 7
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=7
         name: upload
         run: echo "upload — ${{ env.step_no }}"
 
       - id: install
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=8
         env:
           step_no: 8
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=8
         name: install
         run: echo "install — ${{ env.step_no }}"
 
       - id: export
+        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=9
         env:
           step_no: 9
-        if: github.action == ${{ env.start_from }} || ${{ env.step_no }} >=9
         name: export
         run: echo "export — ${{ env.step_no }}"
 
