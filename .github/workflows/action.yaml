@@ -61,7 +61,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - id: build
-        uses: ./.github/workflows/build-ova
+        uses: ./.github/workflows/build-ova.yaml
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
