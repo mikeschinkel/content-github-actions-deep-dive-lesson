@@ -11,18 +11,20 @@ inputs:
 
 runs:
   using: composite
-
-  env:
-    ran: "!"
-
   steps:
+    - id: init
+      name: Init
+      run: |
+        echo "ran=!" >> $GITHUB_ENV
+        echo "init"
+  
     - id: setup
       if: github.action == inputs.start_from
       name: Setup
       run: |
         echo "ran=${{github.action}}" >> $GITHUB_ENV
         echo "setup"
-  
+
     - id: start
       if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
       name: start
