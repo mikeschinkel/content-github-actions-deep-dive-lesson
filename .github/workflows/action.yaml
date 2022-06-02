@@ -40,6 +40,8 @@ on:
           - from-install
           - from-export
 
+env:
+  VARS_FILE: /tmp/vars.env
 
 jobs:
   init:
@@ -75,7 +77,7 @@ jobs:
     needs: [init, gatekeeper]
     steps:
       - name: Get Env Vars
-        run: cat ${{ needs.init.outputs.vars_file }} >> $GITHUB_ENV
+        run: cat ${{ env.VARS_FILE }} >> $GITHUB_ENV
 
       - name: Show Vars
         run: |
