@@ -33,8 +33,8 @@ runs:
           echo "VCENTER_PASSWORD=it-is-a-secret"
         } > ${{ inputs.vars_file }}
         sed "" ${{ inputs.vars_file }} >> $GITHUB_ENV
-        echo ${{ env.$GITHUB_ENV }}
-        cat ${{ env.$GITHUB_ENV }}
+        echo ${{ env.GITHUB_ENV }}
+        cat ${{ env.GITHUB_ENV }}
 
 outputs:
   concurrency_key:
