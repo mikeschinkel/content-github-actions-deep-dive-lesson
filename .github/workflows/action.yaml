@@ -64,50 +64,49 @@ jobs:
       start_from: ${{ github.event.inputs.start_from }}
     steps:
       - id: setup
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: Setup
         run: |
-          echo "setup — ${{ env.step_no }}"
-
+          echo "setup — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
       - id: start
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: start
-        run: echo "start — ${{ env.step_no }}"
+        run: echo "start — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: clean
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: clean
-        run: echo "clean — ${{ env.step_no }}"
+        run: echo "clean — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: k8s
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: k8s
-        run: echo "k8s — ${{ env.step_no }}"
+        run: echo "k8s — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: tools
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: tools
-        run: echo "tools — ${{ env.step_no }}"
+        run: echo "tools — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: iso
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: iso
-        run: echo "iso — ${{ env.step_no }}"
+        run: echo "iso — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: upload
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: upload
-        run: echo "upload — ${{ env.step_no }}"
+        run: echo "upload — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
       - id: install
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: install
-        run: echo "install — ${{ env.step_no }}"
+        run: echo "install — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}""
 
       - id: export
-        if: github.action == ${{ env.start_from }}
+        if: ${{ github.action }} == ${{ env.start_from }}
         name: export
-        run: echo "export — ${{ env.step_no }}"
+        run: echo "export — ${{ env.step_no }} — ${{ github.action }} — ${{ env.start_from }}"
 
 
 #  build:
