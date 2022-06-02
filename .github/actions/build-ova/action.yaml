@@ -20,7 +20,7 @@ runs:
         echo "init — ${{ inputs.start_from }} — ${{ steps.id }}"
   
     - id: setup
-      if: inputs.start_from == "setup" 
+      if: inputs.start_from == setup
       name: Setup
       shell: bash
       run: |
