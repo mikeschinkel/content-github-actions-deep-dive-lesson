@@ -49,13 +49,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - id: before
+      - name: Show Vars
+        run: |
+          echo "vars_file: ${{ env.vars_file }}"
       - id: set_vars
         name: Set Environment Variables
         uses: ./.github/actions/set-vars
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
-          vars_file: /tmp/vars.env
+          vars_file: ${{ env.vars_file }}
+      - id: after
       - name: Show Vars
         run: |
           echo "VCENTER_SERVER: $VCENTER_SERVER"

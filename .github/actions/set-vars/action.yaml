@@ -4,10 +4,6 @@ name: 'Set environment variables'
 description: 'Configures environment variables for a workflow'
 
 inputs:
-  vars_file:
-    description: "File containing environment variables"
-    required: false
-    default: ./.github/vars/vars.env
   vcenter_server:
     description: "IP address or domain name for vCenter Server (must have a vcenter/<host>.json file in repo for this to work)"
     required: false
@@ -16,6 +12,10 @@ inputs:
     description: "Size of OVA to generate (mini, small, medium or large)"
     required: false
     default: mini
+  vars_file:
+    description: "File containing environment variables"
+    required: false
+    default: ./.github/vars/vars.env
 
 runs:
   using: "composite"
@@ -23,19 +23,19 @@ runs:
     - name: "Generate environment vars file"
       shell: bash
       run: |
-        echo "vars_file: ${{ github.event.inputs.vars_file }}"
+        echo "vars_file: ${{ inputs.vars_file }}"
         {
-          echo "VCENTER_SERVER=${{ github.event.inputs.vcenter_server }}"
-          echo "VM_SIZE=${{ github.event.inputs.vm_size }}"
+          echo "VCENTER_SERVER=${{ inputs.vcenter_server }}"
+          echo "VM_SIZE=${{ inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-        } > "${{ github.event.inputs.vars_file }}"
-        #cat ${{ github.event.inputs.vars_file }}
+        } > "${{ inputs.vars_file }}"
+        #cat ${{ inputs.vars_file }}
 
 outputs:
   concurrency_key:
     description: 'Key by which to limit concurrency'
-    value: ova-build-${{ github.event.inputs.vcenter_server }}-${{ github.ref }}
+    value: ova-build-${{ vcenter_server }}-${{ github.ref }}
   vars_file:
     description: "Filepath of Environment Vars file"
-    value: ${{ github.event.inputs.vars_file }}
+    value: ${{ inputs.vars_file }}
