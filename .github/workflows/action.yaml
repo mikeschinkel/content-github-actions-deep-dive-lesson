@@ -41,7 +41,7 @@ on:
           - from-export
 
 env:
-  VARS_FILE: /tmp/vars.env
+  vars_file: /tmp/vars.env
 
 jobs:
   init:
@@ -55,10 +55,12 @@ jobs:
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
+          vars_file: ${{ env.vars_file }}
       - name: Show Vars
         run: |
           echo "VCENTER_SERVER: $VCENTER_SERVER"
           echo "VM_SIZE: $VM_SIZE"
+          echo "vars_file: ${{ env.vars_file }}"
 
     outputs:
       vars_file: ${{ steps.set_vars.outputs.vars_file }}
