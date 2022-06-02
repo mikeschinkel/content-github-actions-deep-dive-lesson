@@ -16,9 +16,9 @@ runs:
       name: Init
       shell: bash
       run: |
+        echo "Initializing 'ran' environment variable"
         echo "ran=!" >> $GITHUB_ENV
-        echo "init — ${{ inputs.start_from }} — ${{ steps.id }}"
-  
+
     - id: setup
       if: inputs.start_from == 'setup'
       name: Setup
