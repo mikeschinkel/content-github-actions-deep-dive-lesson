@@ -51,8 +51,13 @@ jobs:
         name: Set Environment Variables
         uses: ./.github/actions/set-vars
         with:
-          vcenter_server: ${{ inputs.vcenter_server }}
-          vm_size: ${{ inputs.vm_size }}
+          vcenter_server: ${{ github.event.inputs.vcenter_server }}
+          vm_size: ${{ github.event.inputs.vm_size }}
+      - name: Show Vars
+        run: |
+          echo "VCENTER_SERVER: $VCENTER_SERVER"
+          echo "VM_SIZE: $VM_SIZE"
+
     outputs:
       concurrency_key: ${{ steps.set_vars.outputs.concurrency_key }}
 
@@ -70,6 +75,7 @@ jobs:
     steps:
       - name: Show Vars
         run: |
+          echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
           echo "CONCURRENCY_KEY: ${{ needs.init.outputs.concurrency_key }}"
           env
 
