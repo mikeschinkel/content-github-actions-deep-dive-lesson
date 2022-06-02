@@ -56,8 +56,8 @@ jobs:
         name: Show Vars
         run: |
           echo "VCENTER_SERVER: ${{ env.VCENTER_SERVER }}"
-          echo "VM_SIZE: $vm_size"
-          echo "vars_file: ${{ env.vars_file }}"
+          echo "VM_SIZE: $VM_SIZE"
+          echo "vars_file: ${{ env.VCENTER_USERNAME }}"
 
     outputs:
       vars_file: ${{ steps.set_vars.outputs.vars_file }}
