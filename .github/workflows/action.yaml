@@ -54,12 +54,12 @@ jobs:
           vcenter_server: ${{ inputs.vcenter_server }}
           vm_size: ${{ inputs.vm_size }}
 
-  gatekeeper:
-    runs-on: ubuntu-latest
-    concurrency: ${{ env.CONCURRENCY_KEY }}
-    steps:
-      - name: Announce intent
-      - run: echo 'One at a time'
+#  gatekeeper:
+#    runs-on: ubuntu-latest
+#    concurrency: ${{ env.CONCURRENCY_KEY }}
+#    steps:
+#      - name: Announce intent
+#      - run: echo 'One at a time'
 
   show:
     runs-on: ubuntu-latest
