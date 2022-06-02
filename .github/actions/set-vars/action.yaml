@@ -23,14 +23,13 @@ runs:
     - name: "Generate environment vars file"
       shell: bash
       run: |
-        echo "vars_file: ${{ inputs.vars_file }}"
         {
-          echo "VARS_FILE=${{ inputs.vars_file }}"
           echo "VCENTER_SERVER=${{ inputs.vcenter_server }}"
           echo "VM_SIZE=${{ inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-        } > "${{ inputs.vars_file }}"
+        } > ${{ inputs.vars_file }}
+        cat ${{ inputs.vars_file }}
 
 outputs:
   concurrency_key:
