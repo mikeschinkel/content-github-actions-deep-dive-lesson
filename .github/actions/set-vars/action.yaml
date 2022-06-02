@@ -22,7 +22,7 @@ runs:
     - name: "Generate environment vars file"
       shell: bash
       env:
-        vars_file: github/vars/vars.env
+        vars_file: ./.github/vars/vars.env
       run: |
         {
           echo "VCENTER_SERVER=${{ inputs.vcenter_server }}"
