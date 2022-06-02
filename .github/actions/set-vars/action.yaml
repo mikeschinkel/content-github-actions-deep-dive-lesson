@@ -12,6 +12,10 @@ inputs:
     description: "Size of OVA to generate (mini, small, medium or large)"
     required: false
     default: mini
+  vars_file:
+    description: "File containing environment variables"
+    required: false
+    default: ./.github/vars/vars.env
 
 runs:
   using: "composite"
@@ -24,10 +28,13 @@ runs:
           echo "VM_SIZE=${{ github.event.inputs.vm_size }}"
           echo "VCENTER_USERNAME=foo@bar.baz"
           echo "VCENTER_PASSWORD=it-is-a-secret"
-        } >> $GITHUB_ENV
-        cat $GITHUB_ENV
+        } > ${{ github.event.inputs.filepath }}
+        cat ${{ github.event.inputs.filepath }}
 
 outputs:
   concurrency_key:
     description: 'Key by which to limit concurrency'
     value: ova-build-${{ github.event.inputs.vcenter_server }}-${{ github.ref }}
+  vars_file:
+    description: "Filepath of Environment Vars file"
+    value: ${{ github.event.inputs.vars_file }}

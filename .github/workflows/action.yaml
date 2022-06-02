@@ -59,6 +59,7 @@ jobs:
           echo "VM_SIZE: $VM_SIZE"
 
     outputs:
+      vars_file: ${{ steps.set_vars.outputs.vars_file }}
       concurrency_key: ${{ steps.set_vars.outputs.concurrency_key }}
 
   gatekeeper:
@@ -73,9 +74,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [init, gatekeeper]
     steps:
+      - name: Get Env Vars
+        run: cat ${{ needs.init.outputs.vars_file }} >> $GITHUB_ENV
+
       - name: Show Vars
         run: |
           echo "VCENTER_SERVER: ${VCENTER_SERVER}"
+          echo "VM_SIZE: $VM_SIZE"
           echo "CONCURRENCY_KEY: ${{ needs.init.outputs.concurrency_key }}"
 
 
