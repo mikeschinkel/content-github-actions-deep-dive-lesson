@@ -49,6 +49,8 @@ jobs:
       - id: get_key
         name: Get Key
         uses: ./.github/actions/concurrency-key
+        with:
+          vcenter_server: ${{ github.event.inputs.vcenter_server }}
       - name: Show Key
         run: |
           echo "Concurrency Key: ${{ steps.get_key.outputs.concurrency_key }}"

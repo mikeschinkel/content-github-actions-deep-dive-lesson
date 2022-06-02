@@ -4,6 +4,11 @@ name: 'Get Concurrency Key'
 description: 'Sets concurrency_key as output'
 
 inputs:
+  vcenter_server:
+    description: 'vCenter Server to run on'
+    required: false
+    default: 10.174.8.106
+
   concurrency_key:
     description: "The concurrency key to use"
     required: false
