@@ -36,7 +36,7 @@ runs:
 outputs:
   concurrency_key:
     description: 'Key by which to limit concurrency'
-    value: ova-build-${{ vcenter_server }}-${{ github.ref }}
+    value: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}
   vars_file:
     description: "Filepath of Environment Vars file"
     value: ${{ inputs.vars_file }}
