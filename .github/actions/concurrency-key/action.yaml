@@ -16,9 +16,10 @@ runs:
       env:
         concurrency_key: ova-build-${{ inputs.vcenter_server }}-${{ github.ref }}
       shell: bash
-      run: 'echo "Concurrency key: ${{ env.concurrency_key }}"'
+      run: |
+        echo "Concurrency key: ${{ env.concurrency_key }}"
 
 outputs:
   concurrency_key:
     description: 'Key by which to limit concurrency'
-    value: env.concurrency_key
+    value: ${{ env.concurrency_key }}
