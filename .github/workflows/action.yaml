@@ -48,6 +48,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        if: success()
       - name: Get Key
         id: get_key
         uses: ./.github/actions/concurrency-key
