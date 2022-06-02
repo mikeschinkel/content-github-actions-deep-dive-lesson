@@ -20,74 +20,74 @@ runs:
         echo "init — ${{ inputs.start_from }} — ${{ steps.id }}"
   
     - id: setup
-      if: github.action == inputs.start_from
+      if: "setup" == inputs.start_from
       name: Setup
       shell: bash
       run: |
-        echo "ran=${{github.action}}" >> $GITHUB_ENV
+        echo "ran=setup" >> $GITHUB_ENV
         echo "setup"
 
     - id: start
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "start"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: start
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=start ${{env.ran}}" >> $GITHUB_ENV
         echo "start"
   
     - id: clean
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "clean"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: clean
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=clean ${{env.ran}}" >> $GITHUB_ENV
         echo "clean"
   
     - id: k8s
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "k8s"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: k8s
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=k8s ${{env.ran}}" >> $GITHUB_ENV
         echo "k8s"
   
     - id: tools
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "tools"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: tools
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=tools ${{env.ran}}" >> $GITHUB_ENV
         echo "tools"
   
     - id: iso
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "iso"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: iso
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=iso ${{env.ran}}" >> $GITHUB_ENV
         echo "iso"
   
     - id: upload
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "upload"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: upload
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=upload ${{env.ran}}" >> $GITHUB_ENV
         echo "upload"
   
     - id: install
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "install"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: install
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=install ${{env.ran}}" >> $GITHUB_ENV
         echo "install"
   
     - id: export
-      if: github.action==inputs.start_from || contains(env.ran,inputs.start_from)
+      if: "export"==inputs.start_from || contains(env.ran,inputs.start_from)
       name: export
       shell: bash
       run: |
-        echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+        echo "ran=export ${{env.ran}}" >> $GITHUB_ENV
         echo "export"
   
