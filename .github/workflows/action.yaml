@@ -48,7 +48,7 @@ jobs:
         uses: actions/checkout@v2
       - id: get_key
         name: Get Key
-        uses: .github/actions/concurrency-key
+        uses: ./.github/actions/concurrency-key
       - name: Show Key
         run: |
           echo "Concurrency Key: ${{ steps.get_key.outputs.concurrency_key }}"
@@ -64,7 +64,7 @@ jobs:
     steps:
       - id: set_vars
         name: Set Environment Variables
-        uses: .github/actions/set-vars
+        uses: ./.github/actions/set-vars
         with:
           vcenter_server: ${{ github.event.inputs.vcenter_server }}
           vm_size: ${{ github.event.inputs.vm_size }}
