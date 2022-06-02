@@ -18,6 +18,7 @@ runs:
       shell: bash
       run: |
         echo "Concurrency key: ${{ env.concurrency_key }}"
+        echo "::set-output name=concurrency_key::${{ env.concurrency_key }}\n"
 
 outputs:
   concurrency_key:
