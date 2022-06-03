@@ -39,28 +39,28 @@ jobs:
     env:
       start_from: ${{ github.event.inputs.start_from }}
       ran: "!"
-    strategy:
-      max-parallel: 1
-      matrix:
-        steps: [ setup, start, clean, k8s, tools, iso, upload, install, export ]
-#        descrs: [
-#          "Ensure required tools installed",
-#          "Ensure the OVA Builder VM has been started",
-#          "Clean the Work Directories of the OVA Builder",
-#          "Build the Kubernetes Installer",
-#          "Build the HCMS Tools Tarball",
-#          "Build the GLCP OnPrem Gateway ISO",
-#          "Upload the ISO to vSphere Datastore",
-#          "Create a VM on vSphere based on the ISO",
-#          "Export the OVA from the ISO-based VM to the OVA Builder",
-#        ]
+      steps: ( "foo" "bar" "baz" )
     steps:
-      - name: ${{ matrix.step }}
-        if: matrix.step==env.start_from || contains(env.ran,env.start_from)
+      - name: Build Steps
         run: |
-          echo "ran=${{matrix.step}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "Step: ${{ matrix.step }}"
-          echo "Run thus far: ${{ env.ran }}"
+          steps="setup, start, clean, k8s, tools, iso, upload, install, export"
+          for step in ${{ env.steps[@] }}; do
+            echo "Step: ${step}"
+          done
+#
+#            if [[ "${step}" == "${{env.start_from}}" || "${{env.ran}}" =~ ${{env.start_from)}} ]]; then
+#              echo "Step: ${step}"
+#            fi
+
+#setup    "Ensure required tools installed",
+#start    "Ensure the OVA Builder VM has been started",
+#clean    "Clean the Work Directories of the OVA Builder",
+#k8s      "Build the Kubernetes Installer",
+#tools    "Build the HCMS Tools Tarball",
+#iso      "Build the GLCP OnPrem Gateway ISO",
+#upload   "Upload the ISO to vSphere Datastore",
+#install  "Create a VM on vSphere based on the ISO",
+#export   "Export the OVA from the ISO-based VM to the OVA Builder",
 
 
 #  build:
