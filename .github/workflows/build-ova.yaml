@@ -39,69 +39,29 @@ jobs:
     env:
       start_from: ${{ github.event.inputs.start_from }}
       ran: "!"
+    strategy:
+      max-parallel: 1
+      matrix:
+        steps: [ setup, clean, k8s, tools, iso, upload, install, export ]
+#        descrs: [
+#          "Ensure required tools installed",
+#          "Ensure the OVA Builder VM has been started",
+#          "Clean the Work Directories of the OVA Builder",
+#          "Build the Kubernetes Installer",
+#          "Build the HCMS Tools Tarball",
+#          "Build the GLCP OnPrem Gateway ISO",
+#          "Upload the ISO to vSphere Datastore",
+#          "Create a VM on vSphere based on the ISO",
+#          "Export the OVA from the ISO-based VM to the OVA Builder",
+#        ]
     steps:
-      - id: setup
-        if: github.action == env.start_from
-        name: Setup
-        run: |
-          echo "ran=${{github.action}}" >> $GITHUB_ENV
-          echo "setup — ${{ env.ran }} — ${{ env.start_from }}"
-
-      - id: start
+      - id: ${{ matrix.step }}
         if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: start
+        name: ${{ matrix.step }}
         run: |
           echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "start — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: clean
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: clean
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "clean — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: k8s
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: k8s
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "k8s — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: tools
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: tools
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "tools — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: iso
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: iso
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "iso — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: upload
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: upload
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "upload — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: install
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: install
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "install — ${{ env.ran }} — ${{ env.start_from  }} "
-
-      - id: export
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: export
-        run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
-          echo "export — ${{ env.ran }} — ${{ env.start_from  }} "
+          echo "Step: ${{ matrix.step }}"
+          echo "Run thus far: ${{ env.ran }}"
 
 
 #  build:
