@@ -42,7 +42,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        steps: [ setup, clean, k8s, tools, iso, upload, install, export ]
+        steps: [ setup, start, clean, k8s, tools, iso, upload, install, export ]
 #        descrs: [
 #          "Ensure required tools installed",
 #          "Ensure the OVA Builder VM has been started",
@@ -56,9 +56,9 @@ jobs:
 #        ]
     steps:
       - name: ${{ matrix.step }}
-        if: github.action==env.start_from || contains(env.ran,env.start_from)
+        if: matrix.step==env.start_from || contains(env.ran,env.start_from)
         run: |
-          echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
+          echo "ran=${{matrix.step}} ${{env.ran}}" >> $GITHUB_ENV
           echo "Step: ${{ matrix.step }}"
           echo "Run thus far: ${{ env.ran }}"
 
