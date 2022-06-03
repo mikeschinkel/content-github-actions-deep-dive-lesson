@@ -39,12 +39,14 @@ jobs:
     env:
       start_from: ${{ github.event.inputs.start_from }}
       ran: "!"
-      steps: "setup, start, clean, k8s, tools, iso, upload, install, export"
+      steps: "setup start clean k8s tools iso upload install export"
     steps:
       - name: Build Steps
         run: |
           for step in ${{ env.steps }}; do
+            echo "::group::${step}"
             echo "Step: ${step}"
+            echo "::endgroup::"
           done
 #
 #            if [[ "${step}" == "${{env.start_from}}" || "${{env.ran}}" =~ ${{env.start_from)}} ]]; then

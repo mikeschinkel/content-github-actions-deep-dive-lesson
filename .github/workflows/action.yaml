@@ -28,7 +28,7 @@ on:
         type: choice
         description: 'Step to start build FROM (inclusive)'
         required: false
-        default: k8s
+        default: start
         options:
           - setup
           - start
