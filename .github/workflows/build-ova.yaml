@@ -39,12 +39,11 @@ jobs:
     env:
       start_from: ${{ github.event.inputs.start_from }}
       ran: "!"
-      steps: ( "foo" "bar" "baz" )
+      steps: "setup, start, clean, k8s, tools, iso, upload, install, export"
     steps:
       - name: Build Steps
         run: |
-          steps="setup, start, clean, k8s, tools, iso, upload, install, export"
-          for step in ${{ env.steps[@] }}; do
+          for step in ${{ env.steps }}; do
             echo "Step: ${step}"
           done
 #
