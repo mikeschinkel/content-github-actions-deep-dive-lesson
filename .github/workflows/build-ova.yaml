@@ -55,9 +55,8 @@ jobs:
 #          "Export the OVA from the ISO-based VM to the OVA Builder",
 #        ]
     steps:
-      - id: ${{ matrix.step }}
+      - name: ${{ matrix.step }}
         if: github.action==env.start_from || contains(env.ran,env.start_from)
-        name: ${{ matrix.step }}
         run: |
           echo "ran=${{github.action}} ${{env.ran}}" >> $GITHUB_ENV
           echo "Step: ${{ matrix.step }}"
