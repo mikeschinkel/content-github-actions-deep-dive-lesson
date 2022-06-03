@@ -44,9 +44,9 @@ jobs:
       - name: Build Steps
         run: |
           for step in ${{ env.steps }}; do
-            echo "::group::${step}"
+            echo "::step::${step}"
             echo "Step: ${step}"
-            echo "::endgroup::"
+            echo "::endstep::"
           done
 #
 #            if [[ "${step}" == "${{env.start_from}}" || "${{env.ran}}" =~ ${{env.start_from)}} ]]; then
