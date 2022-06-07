@@ -8,7 +8,7 @@ on:
         type: choice
         description: 'Step to start build FROM (inclusive)'
         required: false
-        default: start
+        default: setup
         options:
           - setup
           - start
