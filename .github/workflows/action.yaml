@@ -4,26 +4,6 @@ name: Build OVA
 on:
   workflow_dispatch:
     inputs:
-      vcenter_server:
-        type: choice
-        description: 'vCenter Server to run OVA build on'
-        required: true
-        default: 10.174.8.106
-        options:
-          - 10.174.8.106
-          - 10.174.8.38
-
-      vm_size:
-        type: choice
-        description: 'Size of OVA to build'
-        required: true
-        default: small
-        options:
-          - mini
-          - small
-          - medium
-          - large
-
       start_from:
         type: choice
         description: 'Step to start build FROM (inclusive)'
@@ -40,37 +20,85 @@ on:
           - install
           - export
 
+env:
+  start_from: ${{ github.event.inputs.start_from }}
+  ran: "!"
+
 jobs:
-  call-workflow-passing-data:
-    uses: ./.github/workflows/build-ova.yaml
-    with:
-      vcenter_server: ${{ github.event.inputs.vcenter_server }}
-      vm_size: ${{ github.event.inputs.vm_size }}
-      start_from: ${{ github.event.inputs.start_from }}
+  build:
+    name: "Build OVA"
+    runs-on: ubuntu-latest
+    steps:
 
+        - id: setup
+          if: env.start_from == 'setup'
+          name: Setup
+          shell: bash
+          run: |
+            echo "ran=setup" >> $GITHUB_ENV
+            echo "setup"
 
-#  build:
-#    runs-on: ubuntu-latest
-#    needs: init
-#    concurrency:
-#      group: ${{ needs.init.outputs.concurrency_key }}"
-#      cancel-in-progress: true
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Set Environment Variables
-#        uses: ./.github/actions/set-vars
-#        with:
-#          vcenter_server: ${{ github.event.inputs.vcenter_server }}
-#          vm_size: ${{ github.event.inputs.vm_size }}
-#        id: set_vars
-#      - name: Show Vars
-#        run: |
-#          echo "CONCURRENCY_KEY:  ${{ needs.init.outputs.concurrency_key }}"
-#          echo "VCENTER_SERVER:   ${{ env.VCENTER_SERVER }}"
-#          echo "VCENTER_USERNAME: ${{ env.VCENTER_USERNAME }}"
-#          echo "VCENTER_PASSWORD: ${{ env.VCENTER_PASSWORD }}"
-#          echo "VM_SIZE:          ${{ env.VM_SIZE }}"
-#
-#
+        - id: start
+          if: env.start_from == 'start' || contains(env.ran,env.start_from)
+          name: start
+          shell: bash
+          run: |
+            echo "ran=start ${{env.ran}}" >> $GITHUB_ENV
+            echo "start"
 
+        - id: clean
+          if: env.start_from == 'clean' || contains(env.ran,env.start_from)
+          name: clean
+          shell: bash
+          run: |
+            echo "ran=clean ${{env.ran}}" >> $GITHUB_ENV
+            echo "clean"
+
+        - id: k8s
+          if: env.start_from == 'k8s' || contains(env.ran,env.start_from)
+          name: k8s
+          shell: bash
+          run: |
+            echo "ran=k8s ${{env.ran}}" >> $GITHUB_ENV
+            echo "k8s"
+
+        - id: tools
+          if: env.start_from == 'tools' || contains(env.ran,env.start_from)
+          name: tools
+          shell: bash
+          run: |
+            echo "ran=tools ${{env.ran}}" >> $GITHUB_ENV
+            echo "tools"
+
+        - id: iso
+          if: env.start_from == 'iso' || contains(env.ran,env.start_from)
+          name: iso
+          shell: bash
+          run: |
+            echo "ran=iso ${{env.ran}}" >> $GITHUB_ENV
+            echo "iso"
+
+        - id: upload
+          if: env.start_from == 'upload' || contains(env.ran,env.start_from)
+          name: upload
+          shell: bash
+          run: |
+            echo "ran=upload ${{env.ran}}" >> $GITHUB_ENV
+            echo "upload"
+
+        - id: install
+          if: env.start_from == 'install' || contains(env.ran,env.start_from)
+          name: install
+          shell: bash
+          run: |
+            echo "ran=install ${{env.ran}}" >> $GITHUB_ENV
+            echo "install"
+
+        - id: export
+          if: env.start_from == 'export' || contains(env.ran,env.start_from)
+          name: export
+          shell: bash
+          run: |
+            echo "ran=export ${{env.ran}}" >> $GITHUB_ENV
+            echo "export"
+  
