@@ -5,7 +5,7 @@ on: push
 
 jobs:
   build:
-    name: [GitHub](https://github.com)
+    name: Testing Hyperlinks
 
     runs-on: ubuntu-latest
 
