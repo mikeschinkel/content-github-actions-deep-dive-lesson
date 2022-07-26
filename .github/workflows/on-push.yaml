@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Output a hyperlink (maybe)
         run: |
-          echo [GitHub](https://github.com)
+          echo "[GitHub](https://github.com)"
