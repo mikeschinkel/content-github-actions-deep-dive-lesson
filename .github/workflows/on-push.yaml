@@ -1,15 +1,16 @@
 
-name: Testing Hyperlinks
+name: [GitHub](https://github.com)
 
 on: push
 
 jobs:
   build:
-    name: Testing Hyperlinks
+    name: [GitHub](https://github.com)
 
     runs-on: ubuntu-latest
 
     steps:
-      - name: Output a hyperlink (maybe)
+      - name: "[GitHub](https://github.com)"
         run: |
+          echo "https://github.com"
           echo "[GitHub](https://github.com)"
