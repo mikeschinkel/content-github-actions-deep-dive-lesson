@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "[GitHub](https://github.com)"
+      - name: Testing Hyperlinks
         run: |
           echo "https://github.com"
-          echo "[GitHub](https://github.com)"
